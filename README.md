@@ -1,29 +1,39 @@
-# grade-calculator
+# Grade Calculator
 
-## Project setup
-```
-yarn install
-```
+A web app to calculate an achieved grade based on reached points and grade scale.
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+## Demo
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+<http:/gradecalc.devmount.de>
 
-### Run your tests
-```
-yarn run test
-```
+## Features
 
-### Lints and fixes files
-```
-yarn run lint
-```
+- Different scales can be configured
+- Display of grade and position in scale
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Get started
+
+1. Get all files
+
+    ```bash
+    git clone https://github.com/devmount/grade-calculator
+    ```
+
+2. Install all dependencies using [Yarn](https://yarnpkg.com)
+
+    ```bash
+    cd grade-calculator
+    yarn
+    ```
+
+3. Either start the development server with hot reload at localhost:8080 ...
+
+    ```bash
+    yarn serve
+    ```
+
+4. ... or create a production build with minification
+
+    ```bash
+    yarn build
+    ```

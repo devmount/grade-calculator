@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "spectre.css": "^0.5.4",
     "vue": "^2.5.17"
   },
   "devDependencies": {
@@ -44,5 +45,13 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "vue": {
+    "baseUrl": ""
+  },
+  "babel": {
+    "presets": [
+      "@vue/app"
+    ]
+  }
 }
