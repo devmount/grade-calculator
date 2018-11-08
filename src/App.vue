@@ -18,16 +18,16 @@
                 <div class="column col-6">
                   <div class="input-group" :class="{ 'has-error': error.possible }">
                     <span class="input-group-addon addon-lg">Möglich</span>
-                    <input class="form-input input-lg" v-model="possible" type="number" step="0.5" placeholder="z.B. 20">
+                    <input class="form-input input-lg" v-model="input.possible" type="number" step="0.5" placeholder="z.B. 20">
                   </div>
                 </div>
                 <div class="column col-12 mt-2">
-                  <div class="input-group" :class="{ 'has-error': error.reached }">
+                  <div class="input-group">
                     <span class="input-group-addon addon-lg">Ergebnis</span>
-                    <input class="form-input input-lg" v-model="reached" type="number" step="0.5" placeholder="z.B. 18">
-                    <select class="form-select select-lg">
-                      <option>Erreichte Punkte</option>
-                      <option>Fehler</option>
+                    <input class="form-input input-lg" v-model="input.reached" type="number" step="0.5" placeholder="z.B. 18" :class="{ 'is-error': error.reached }">
+                    <select class="form-select select-lg" v-model="config.points">
+                      <option value="r">Erreichte Punkte</option>
+                      <option value="e">Fehler</option>
                     </select>
                   </div>
                 </div>
@@ -36,9 +36,10 @@
               <h5 class="mt-3">Maßstab</h5>
               <div class="columns">
                 <div class="column col-12 mb-2">
-                  <div class="input-group" :class="{ 'has-error': error.min2 }">
+                  <div class="input-group">
                     <span class="input-group-addon addon-lg">Voreinstellung</span>
-                    <select class="form-select select-lg">
+                    <select class="form-select select-lg" v-model="config.preset">
+                      <option value="">Keine</option>
                       <option value="96,80,60,45,16">96, 80, 60, 45, 16 — Allgemein</option>
                       <option value="99,95,90,85,80">99, 95, 90, 85, 80 — Diktat</option>
                       <option value="95,90,85,80,75">95, 90, 85, 80, 75 — 5% Schritte</option>
@@ -47,38 +48,52 @@
                   </div>
                 </div>
                 <div class="column col-8">
-                  <div class="input-group mb-1" :class="{ 'has-error': error.max2 }">
+                  <div class="input-group mb-1" :class="{ 'has-error': error.grade1 }">
                     <span class="input-group-addon addon-lg">Note 1 ab</span>
-                    <input class="form-input input-lg" v-model="max2" type="number" placeholder="z.B. 10">
+                    <input class="form-input input-lg" v-model="input.grade1" type="number" placeholder="z.B. 10">
                     <span class="input-group-addon addon-lg">%</span>
                   </div>
-                  <div class="input-group mb-1" :class="{ 'has-error': error.max2 }">
+                </div>
+                <div class="column col-8">
+                  <div class="input-group mb-1" :class="{ 'has-error': error.grade2 }">
                     <span class="input-group-addon addon-lg">Note 2 ab</span>
-                    <input class="form-input input-lg" v-model="max2" type="number" placeholder="z.B. 10">
+                    <input class="form-input input-lg" v-model="input.grade2" type="number" placeholder="z.B. 10">
                     <span class="input-group-addon addon-lg">%</span>
                   </div>
-                  <div class="input-group mb-1" :class="{ 'has-error': error.max2 }">
+                </div>
+                <div class="column col-8">
+                  <div class="input-group mb-1" :class="{ 'has-error': error.grade3 }">
                     <span class="input-group-addon addon-lg">Note 3 ab</span>
-                    <input class="form-input input-lg" v-model="max2" type="number" placeholder="z.B. 10">
+                    <input class="form-input input-lg" v-model="input.grade3" type="number" placeholder="z.B. 10">
                     <span class="input-group-addon addon-lg">%</span>
                   </div>
-                  <div class="input-group mb-1" :class="{ 'has-error': error.max2 }">
+                </div>
+                <div class="column col-8">
+                  <div class="input-group mb-1" :class="{ 'has-error': error.grade4 }">
                     <span class="input-group-addon addon-lg">Note 4 ab</span>
-                    <input class="form-input input-lg" v-model="max2" type="number" placeholder="z.B. 10">
+                    <input class="form-input input-lg" v-model="input.grade4" type="number" placeholder="z.B. 10">
                     <span class="input-group-addon addon-lg">%</span>
                   </div>
-                  <div class="input-group mb-1" :class="{ 'has-error': error.max2 }">
+                </div>
+                <div class="column col-8">
+                  <div class="input-group mb-1" :class="{ 'has-error': error.grade5 }">
                     <span class="input-group-addon addon-lg">Note 5 ab</span>
-                    <input class="form-input input-lg" v-model="max2" type="number" placeholder="z.B. 10">
+                    <input class="form-input input-lg" v-model="input.grade5" type="number" placeholder="z.B. 10">
                     <span class="input-group-addon addon-lg">%</span>
                   </div>
                 </div>
               </div>
 
               <div class="columns">
-                <div class="column col-12">
+                <div class="column col-8">
+                  <div class="input-group mb-1">
+                    <span class="input-group-addon addon-lg">Note 6 ab</span>
+                    <input class="form-input input-lg" value="0" type="number" disabled>
+                    <span class="input-group-addon addon-lg">%</span>
+                  </div>
+                </div>
+                <div class="column col-4">
                   <button class="btn btn-primary float-right btn-lg" @click="calculateGrade">Start <i class="icon icon-arrow-right"></i></button>
-                  <p>Sonst Note 6</p>
                 </div>
               </div>
 
@@ -99,11 +114,15 @@
           <div class="card output" v-else>
             <div class="card-body">
               <div class="columns">
-                <div class="column col-6">
-                  <h5>Multiplikation</h5>
+                <div class="column col-3">
+                  <h5>Note</h5>
+                  <!-- <p>(gerundeter Prozentwert)</p> -->
+                  <span class="label grade">{{ grade }}</span>
                 </div>
-                <div class="column col-6">
-                  <h5>Division</h5>
+                <div class="column col-9">
+                  <h5>Erbrachte Leistung</h5>
+                  <!-- <p>(ungerundeter Prozentwert)</p> -->
+                  <meter class="meter" :value="percent" :optimum="input.grade1" min="0" max="100" :low="input.grade5" :high="input.grade2">{{ percent }}%</meter>
                 </div>
               </div>
             </div>
@@ -141,39 +160,88 @@ export default {
   name: 'app',
   data () {
     return {
-      possible: '',
-      reached: '',
-      min2: '',
-      max2: '',
-      number: '',
+      input: {
+        possible: '',
+        reached: '',
+        grade1: '',
+        grade2: '',
+        grade3: '',
+        grade4: '',
+        grade5: '',
+      },
+      config: {
+        points: 'r',
+        preset: ''
+      },
       error: {
         possible: false,
         reached: false,
-        min2: false,
-        max2: false,
-        number: false,
+        grade1: '',
+        grade2: '',
+        grade3: '',
+        grade4: '',
+        grade5: '',
       },
-      maxnumber: '',
-      mtasks: [],
-      dtasks: [],
       result: false,
-      copied: {
-        mlist: false,
-        dlist: false,
+      grade: 0,
+      percent: 0,
+    }
+  },
+  watch: {
+    'config.preset': function (val) {
+      if (val != '') {
+        var preset = val.split(',')
+        this.input.grade1 = preset[0]
+        this.input.grade2 = preset[1]
+        this.input.grade3 = preset[2]
+        this.input.grade4 = preset[3]
+        this.input.grade5 = preset[4]
+      } else {
+        this.input.grade1 = ''
+        this.input.grade2 = ''
+        this.input.grade3 = ''
+        this.input.grade4 = ''
+        this.input.grade5 = ''
       }
     }
   },
   methods: {
     calculateGrade () {
       // check input
-      this.error.possible = (this.possible === '') ? true : false
-      this.error.reached = (this.reached === '') ? true : false
-      this.error.min2 = (this.min2 === '') ? true : false
-      this.error.max2 = (this.max2 === '') ? true : false
-      this.error.number = (this.number === '') ? true : false
+      this.error.possible = (this.input.possible === '') ? true : false
+      this.error.reached = (this.input.reached === '') ? true : false
+      this.error.grade1 = (this.input.grade1 === '') ? true : false
+      this.error.grade2 = (this.input.grade2 === '') ? true : false
+      this.error.grade3 = (this.input.grade3 === '') ? true : false
+      this.error.grade4 = (this.input.grade4 === '') ? true : false
+      this.error.grade5 = (this.input.grade5 === '') ? true : false
       // no error occured: create result
-      if (!this.error.possible && !this.error.reached && !this.error.min2 && !this.error.max2 && !this.error.number) {
-        this.error = []
+      if (!this.error.possible && !this.error.reached && !this.error.grade1 && !this.error.grade2 && !this.error.grade3 && !this.error.grade4 && !this.error.grade5) {
+        this.result = true
+        // calculate percent
+        this.percent = (this.config.points == 'r')
+          ? (this.input.reached/this.input.possible*100).toFixed(2)
+          : ((1-(this.input.reached/this.input.possible))*100).toFixed(2)
+        // calculate grade
+        var rounded = Math.round(this.percent)
+        if (rounded < this.input.grade5) {
+            this.grade = '6'
+        } else
+        if (rounded >= this.input.grade5 && rounded < this.input.grade4) {
+            this.grade = '5'
+        } else
+        if (rounded >= this.input.grade4 && rounded < this.input.grade3) {
+            this.grade = '4'
+        } else
+        if (rounded >= this.input.grade3 && rounded < this.input.grade2) {
+            this.grade = '3'
+        } else
+        if (rounded >= this.input.grade2 && rounded < this.input.grade1) {
+            this.grade = '2'
+        } else
+        if (rounded >= this.input.grade1) {
+            this.grade = '1'
+        }
       }
     }
   }
@@ -185,7 +253,7 @@ $primary-color: #f57c00;
 
 @import "node_modules/spectre.css/src/spectre";
 @import "node_modules/spectre.css/src/spectre-icons";
-// @import "node_modules/spectre.css/src/spectre-exp";
+@import "node_modules/spectre.css/src/spectre-exp";
 
 #app {
   margin-top: 2em;
@@ -218,6 +286,11 @@ $primary-color: #f57c00;
   }
   .output {
     min-height: 526px;
+  }
+  .grade {
+    font-size: 200%;
+    padding: .2rem .8rem;
+    font-weight: bold;
   }
 }
 </style>
