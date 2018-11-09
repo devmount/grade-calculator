@@ -159,7 +159,7 @@
             <p>
               <span class="d-block">Version 0.2.3</span>
               <i class="icon icon-resize-horiz"></i> with love by <a href="https://twitter.com/devmount" target="_blank">Andreas Müller</a>.
-              <i class="icon icon-download ml-1"></i> on <a href="https://github.com/devmount/task-generator" target="_blank">GitHub</a>.
+              <i class="icon icon-download ml-1"></i> on <a href="https://github.com/devmount/grade-calculator" target="_blank">GitHub</a>.
             </p>
           </div>
         </div>
