@@ -114,15 +114,30 @@
           <div class="card output" v-else>
             <div class="card-body">
               <div class="columns">
-                <div class="column col-3">
+                <div class="column col-2">
                   <h5>Note</h5>
-                  <!-- <p>(gerundeter Prozentwert)</p> -->
                   <span class="label grade">{{ grade }}</span>
                 </div>
-                <div class="column col-9">
+                <div class="column col-10">
                   <h5>Erbrachte Leistung</h5>
-                  <!-- <p>(ungerundeter Prozentwert)</p> -->
                   <meter class="meter" :value="percent" :optimum="input.grade1" min="0" max="100" :low="input.grade5" :high="input.grade2">{{ percent }}%</meter>
+                </div>
+                <div class="column col-12 mt-3">
+                  <h5>Punkteverteilung</h5>
+                  <div class="timeline">
+
+                    <div v-for="(g, i) in scale" :key="i" class="timeline-item" id="timeline-example-1">
+                      <div class="timeline-left">
+                        <a class="timeline-icon" :class="{ 'icon-lg': i == grade }" href="#timeline-example-1">
+                          <i v-show="i == grade" class="icon icon-arrow-right"></i>
+                        </a>
+                      </div>
+                      <div class="timeline-content">
+                        <span class="label mr-2">{{ i }}</span> {{ g[0] }} - {{ g[1] }}
+                      </div>
+                    </div>
+
+                  </div>
                 </div>
               </div>
             </div>
@@ -142,7 +157,7 @@
         <div class="columns">
           <div class="column col-12 text-center text-gray">
             <p>
-              <span class="d-block">Version 0.2.2</span>
+              <span class="d-block">Version 0.2.3</span>
               <i class="icon icon-resize-horiz"></i> with love by <a href="https://twitter.com/devmount" target="_blank">Andreas Müller</a>.
               <i class="icon icon-download ml-1"></i> on <a href="https://github.com/devmount/task-generator" target="_blank">GitHub</a>.
             </p>
@@ -185,6 +200,14 @@ export default {
       result: false,
       grade: 0,
       percent: 0,
+      scale: {
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+      }
     }
   },
   watch: {
@@ -242,6 +265,20 @@ export default {
         if (rounded >= this.input.grade1) {
             this.grade = '1'
         }
+        // calculate point scale
+        let scale = [this.input.grade1, this.input.grade2, this.input.grade3, this.input.grade4, this.input.grade5, 0]
+        for (let g = 1; g <= 6; g++) {
+          if (g == 1) {
+            this.scale[g].push(this.input.possible)
+          } else {
+            this.scale[g].push(Math.round(this.input.possible*scale[g-2]/100)-1)
+          }
+          if (g == 6) {
+            this.scale[g].push(0)
+          } else {
+            this.scale[g].push(Math.round(this.input.possible*scale[g-1]/100))
+          }
+        }
       }
     }
   }
@@ -291,6 +328,28 @@ $primary-color: #f57c00;
     font-size: 200%;
     padding: .2rem .8rem;
     font-weight: bold;
+  }
+
+  // timeline adjustments
+  .timeline .timeline-item {
+    margin-bottom: .8rem;
+
+    &::before {
+      top: 1rem;
+    }
+    .timeline-left {
+      z-index: 100;
+    }
+    &:last-child::before {
+      display: none;
+    }
+    .timeline-content {
+      padding: 0px 0 2px 0.8rem;
+
+      .label {
+        padding: .1em .5em;
+      }
+    }
   }
 }
 </style>
