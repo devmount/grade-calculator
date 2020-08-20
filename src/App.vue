@@ -8,7 +8,7 @@
       </div>
       <div class="columns">
         <div class="column col-6 col-md-12">
-          <h3 class="text-center">Einstellung</h3>
+          <h3 class="text-center">Konfiguration</h3>
 
           <div class="card">
             <div class="card-body">
@@ -102,7 +102,7 @@
 
         </div>
         <div class="column col-6 col-md-12">
-          <h3 class="text-center">Ausgabe</h3>
+          <h3 class="text-center">Ergebnis</h3>
 
           <div class="empty output" v-if="!result">
             <div class="empty-icon">
