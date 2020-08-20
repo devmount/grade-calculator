@@ -157,7 +157,7 @@
         <div class="columns">
           <div class="column col-12 text-center text-gray">
             <p>
-              <span class="d-block">Version 0.2.3</span>
+              <span class="d-block">Version {{ appVersion }}</span>
               <i class="icon icon-resize-horiz"></i> with love by <a href="https://twitter.com/devmount" target="_blank">Andreas Müller</a>.
               <i class="icon icon-download ml-1"></i> on <a href="https://github.com/devmount/grade-calculator" target="_blank">GitHub</a>.
             </p>
@@ -280,6 +280,11 @@ export default {
           }
         }
       }
+    }
+  },
+  computed: {
+    appVersion() {
+      return process.env.PACKAGE_VERSION;
     }
   }
 }
