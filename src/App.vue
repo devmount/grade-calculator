@@ -158,7 +158,7 @@
           <div class="column col-12 text-center text-gray">
             <p>
               <span class="d-block">Version {{ appVersion }}</span>
-              Created by <a href="https://twitter.com/devmount" target="_blank">Andreas Müller</a>.
+              Created by <a href="https://devmount.de" target="_blank">Andreas Müller</a>.
               Download on <a href="https://github.com/devmount/grade-calculator" target="_blank">GitHub</a>.
             </p>
           </div>
