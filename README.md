@@ -4,7 +4,7 @@ A web app to calculate an achieved grade based on reached points and grade scale
 
 ## Demo
 
-<http:/gradecalc.devmount.de>
+<https://grades.devmount.de>
 
 ## Features
 
