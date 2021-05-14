@@ -157,7 +157,7 @@
         <div class="columns">
           <div class="column col-12 text-center text-gray">
             <p>
-              <span class="d-block">Version {{ appVersion }}</span>
+              <span class="d-block">v{{ $version }}</span>
               Created by <a href="https://devmount.de" target="_blank">Andreas Müller</a>.
               Download on <a href="https://github.com/devmount/grade-calculator" target="_blank">GitHub</a>.
             </p>
@@ -280,11 +280,6 @@ export default {
           }
         }
       }
-    }
-  },
-  computed: {
-    appVersion() {
-      return process.env.PACKAGE_VERSION;
     }
   }
 }
