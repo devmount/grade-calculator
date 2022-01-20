@@ -170,8 +170,9 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
   name: 'app',
   data () {
     return {
@@ -282,10 +283,10 @@ export default {
       }
     }
   }
-}
+});
 </script>
 
-<style lang="scss">
+<style>
 @import '~spectre.css/dist/spectre.min.css';
 @import '~spectre.css/dist/spectre-icons.min.css';
 @import "~spectre.css/dist/spectre-exp.min.css";
@@ -320,7 +321,7 @@ export default {
   min-height: 526px;
 }
 #app .grade {
-  font-size: 200%;
+  font-size: 2rem;
   padding: 0.2rem 0.8rem;
   font-weight: bold;
 }

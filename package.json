@@ -7,8 +7,8 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "spectre.css": "^0.5.4",
-    "vue": "^2.6.12"
+    "spectre.css": "^0.5.9",
+    "vue": "^3.2.27"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^5.0.0-rc.2",
