@@ -11,6 +11,11 @@ module.exports = {
 			chunkFilename: "js/[name].bundle.js",
 		},
 	},
+	css: {
+		extract: {
+			filename: 'css/[name].app.css'
+		}
+	},
 	productionSourceMap: false,
 	publicPath: '/'
 }
