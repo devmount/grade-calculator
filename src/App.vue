@@ -325,6 +325,9 @@ export default defineComponent({
   padding: 0.2rem 0.8rem;
   font-weight: bold;
 }
+#app .meter {
+  appearance: meter;
+}
 #app .timeline .timeline-item {
   margin-bottom: 0.8rem;
 }
