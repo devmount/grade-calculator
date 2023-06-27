@@ -157,7 +157,7 @@
         <div class="columns">
           <div class="column col-12 text-center text-gray">
             <p>
-              <span class="d-block">v{{ $version }}</span>
+              <span class="d-block">v{{ version }}</span>
               Created by <a href="https://devmount.de" target="_blank">Andreas Müller</a>.
               Download on <a href="https://github.com/devmount/grade-calculator" target="_blank">GitHub</a>.
             </p>
@@ -170,10 +170,14 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, inject } from 'vue';
 
 export default defineComponent({
   name: 'app',
+  setup () {
+    const version = inject('version');
+    return { version }
+  },
   data () {
     return {
       input: {
@@ -287,9 +291,9 @@ export default defineComponent({
 </script>
 
 <style>
-@import '~spectre.css/dist/spectre.min.css';
-@import '~spectre.css/dist/spectre-icons.min.css';
-@import "~spectre.css/dist/spectre-exp.min.css";
+@import 'spectre.css/dist/spectre.min.css';
+@import 'spectre.css/dist/spectre-icons.min.css';
+@import "spectre.css/dist/spectre-exp.min.css";
 
 #app {
   margin-top: 2em;
