@@ -29,7 +29,7 @@ A web app to calculate an achieved grade based on reached points and grade scale
 3. Either start the development server with hot reload at localhost:8080 ...
 
     ```bash
-    yarn serve
+    yarn dev
     ```
 
 4. ... or create a production build with minification
