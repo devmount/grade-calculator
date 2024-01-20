@@ -21,7 +21,7 @@ A web app to calculate an achieved grade based on reached points and grade scale
     git clone https://github.com/devmount/grade-calculator
     ```
 
-2. Install all dependencies using [Yarn](https://yarnpkg.com)
+2. Install all dependencies
 
     ```bash
     cd grade-calculator
@@ -31,11 +31,11 @@ A web app to calculate an achieved grade based on reached points and grade scale
 3. Either start the development server with hot reload at localhost:8080 ...
 
     ```bash
-    yarn run dev
+    npm run dev
     ```
 
 4. ... or create a production build with minification
 
     ```bash
-    yarn run build
+    npm run build
     ```
