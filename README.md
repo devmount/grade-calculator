@@ -6,6 +6,8 @@ A web app to calculate an achieved grade based on reached points and grade scale
 
 <https://grades.devmount.de>
 
+![image](https://github.com/devmount/grade-calculator/assets/5441654/fcb988a5-148a-4d67-af2a-bbc394eb8839)
+
 ## Features
 
 - Different scales can be configured
@@ -23,17 +25,17 @@ A web app to calculate an achieved grade based on reached points and grade scale
 
     ```bash
     cd grade-calculator
-    yarn
+    npm install
     ```
 
 3. Either start the development server with hot reload at localhost:8080 ...
 
     ```bash
-    yarn dev
+    yarn run dev
     ```
 
 4. ... or create a production build with minification
 
     ```bash
-    yarn build
+    yarn run build
     ```
