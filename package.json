@@ -8,12 +8,12 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "spectre.css": "^0.5.9",
+    "@devmount/sloth.css": "^0.3.0",
     "vue": "^3.2.27"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.5.2",
-    "vite": "^5.4.6"
+    "@vitejs/plugin-vue": "^5.2.1",
+    "vite": "^6.0.1"
   },
   "browserslist": [
     "> 1%",

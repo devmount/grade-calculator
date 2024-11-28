@@ -28,7 +28,7 @@ A web app to calculate an achieved grade based on reached points and grade scale
     npm install
     ```
 
-3. Either start the development server with hot reload at localhost:8080 ...
+3. Either start the development server with hot reload at localhost:5173 ...
 
     ```bash
     npm run dev
