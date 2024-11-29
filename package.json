@@ -8,7 +8,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@devmount/sloth.css": "^0.3.0",
+    "@devmount/sloth.css": "^0.4.0",
     "vue": "^3.2.27"
   },
   "devDependencies": {

@@ -7,11 +7,11 @@
         <h5>Punkte</h5>
         <div class="flex-col gap-2">
           <div class="input-group">
-            <span class="affix w-16 shrink-0 text-right">Möglich</span>
+            <span class="affix w-16 shrink-0 text-end">Möglich</span>
             <input class="w-full" v-model="input.possible" type="number" step="0.5" placeholder="z.B. 20" required>
           </div>
           <div class="input-group">
-            <span class="affix w-16 shrink-0 text-right">Ergebnis</span>
+            <span class="affix w-16 shrink-0 text-end">Ergebnis</span>
             <input class="w-32" v-model="input.reached" type="number" step="0.5" placeholder="z.B. 18" required>
             <select class="w-full" v-model="config.points">
               <option value="r">Erreichte Punkte</option>
@@ -22,7 +22,7 @@
         <h5>Maßstab</h5>
         <div class="flex-col gap-2">
           <div class="input-group">
-            <span class="affix w-20 shrink-0 text-right">Preset</span>
+            <span class="affix w-20 shrink-0 text-end">Preset</span>
             <select class="w-full" v-model="config.preset">
               <option value="">Keine</option>
               <option value="96,80,60,45,16">96, 80, 60, 45, 16 — Allgemein</option>
@@ -32,32 +32,32 @@
             </select>
           </div>
           <div class="input-group mb-1">
-            <span class="affix w-20 shrink-0 text-right">Note 1 ab</span>
+            <span class="affix w-20 shrink-0 text-end">Note 1 ab</span>
             <input class="w-full" v-model="input.grade1" type="number" placeholder="z.B. 10" required>
             <span class="affix">%</span>
           </div>
           <div class="input-group mb-1">
-            <span class="affix w-20 shrink-0 text-right">Note 2 ab</span>
+            <span class="affix w-20 shrink-0 text-end">Note 2 ab</span>
             <input class="w-full" v-model="input.grade2" type="number" placeholder="z.B. 10" required>
             <span class="affix">%</span>
           </div>
           <div class="input-group mb-1">
-            <span class="affix w-20 shrink-0 text-right">Note 3 ab</span>
+            <span class="affix w-20 shrink-0 text-end">Note 3 ab</span>
             <input class="w-full" v-model="input.grade3" type="number" placeholder="z.B. 10" required>
             <span class="affix">%</span>
           </div>
           <div class="input-group mb-1">
-            <span class="affix w-20 shrink-0 text-right">Note 4 ab</span>
+            <span class="affix w-20 shrink-0 text-end">Note 4 ab</span>
             <input class="w-full" v-model="input.grade4" type="number" placeholder="z.B. 10" required>
             <span class="affix">%</span>
           </div>
           <div class="input-group mb-1">
-            <span class="affix w-20 shrink-0 text-right">Note 5 ab</span>
+            <span class="affix w-20 shrink-0 text-end">Note 5 ab</span>
             <input class="w-full" v-model="input.grade5" type="number" placeholder="z.B. 10" required>
             <span class="affix">%</span>
           </div>
           <div class="input-group mb-1">
-            <span class="affix w-20 shrink-0 text-right">Note 6 ab</span>
+            <span class="affix w-20 shrink-0 text-end">Note 6 ab</span>
             <input class="w-full" type="number" value="0" disabled>
             <span class="affix">%</span>
           </div>
@@ -93,7 +93,7 @@
         <div class="flex gap-4">
           <div>
             <h5>Note</h5>
-            <span class="tag lg font-bold accent">{{ grade }}</span>
+            <span class="tag lg font-bold accent"><span class="text-2xl">{{ grade }}</span></span>
           </div>
           <div>
             <h5>Erbrachte Leistung</h5>
@@ -234,24 +234,8 @@ export default defineComponent({
   margin-top: auto;
 }
 
-.grow {
-  flex-grow: 1;
-}
-
-.shrink-0 {
-  flex-shrink: 0;
-}
-
-.text-right {
-  text-align: right;
-}
-
 .w-20 {
   width: 5rem;
-}
-
-.justify-end {
-  justify-content: end;
 }
 
 .list-none {
