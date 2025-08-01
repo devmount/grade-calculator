@@ -6,7 +6,7 @@ A web app to calculate an achieved grade based on reached points and grade scale
 
 <https://grades.devmount.de>
 
-![image](https://github.com/devmount/grade-calculator/assets/5441654/fcb988a5-148a-4d67-af2a-bbc394eb8839)
+<img width="1197" height="990" alt="image" src="https://github.com/user-attachments/assets/6734aaa8-1e48-4f97-a5c0-1c85082610f6" />
 
 ## Features
 
