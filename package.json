@@ -8,13 +8,14 @@
     "serve": "vite preview",
     "lint": "oxlint"
   },
+  "packageManager": "pnpm@11.6.0",
   "dependencies": {
-    "@devmount/sloth.css": "^0.4.0",
-    "vue": "^3.2.27"
+    "@devmount/sloth.css": "^0.4.1",
+    "vue": "^3.5.38"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.7",
-    "oxlint": "^1.9.0",
+    "oxlint": "^1.70.0",
     "vite": "^8.0.16"
   },
   "browserslist": [
