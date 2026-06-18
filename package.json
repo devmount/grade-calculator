@@ -8,6 +8,7 @@
     "serve": "vite preview",
     "lint": "oxlint"
   },
+  "packageManager": "pnpm@11.6.0",
   "dependencies": {
     "@devmount/sloth.css": "^0.4.0",
     "vue": "^3.2.27"
