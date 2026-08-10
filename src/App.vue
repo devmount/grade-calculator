@@ -1,3 +1,86 @@
+<script setup>
+import { ref, reactive, watch } from 'vue';
+
+const input = reactive({
+  possible: '',
+  reached: '',
+  grade1: '',
+  grade2: '',
+  grade3: '',
+  grade4: '',
+  grade5: '',
+});
+const config = reactive({
+  points: 'r',
+  preset: '',
+});
+const result = ref(false);
+const grade = ref(0);
+const percent = ref(0);
+const scale = reactive({
+  1: [],
+  2: [],
+  3: [],
+  4: [],
+  5: [],
+  6: [],
+});
+
+watch(() => config.preset, (val) => {
+  if (val != '') {
+    const preset = val.split(',');
+    input.grade1 = preset[0];
+    input.grade2 = preset[1];
+    input.grade3 = preset[2];
+    input.grade4 = preset[3];
+    input.grade5 = preset[4];
+  } else {
+    input.grade1 = '';
+    input.grade2 = '';
+    input.grade3 = '';
+    input.grade4 = '';
+    input.grade5 = '';
+  }
+});
+
+const calculateGrade = () => {
+  result.value = true;
+  // calculate percent
+  percent.value = (config.points == 'r')
+    ? (input.reached / input.possible * 100).toFixed(2)
+    : ((1 - (input.reached / input.possible)) * 100).toFixed(2);
+  // calculate grade
+  const rounded = Math.round(percent.value);
+  if (rounded < input.grade5) {
+    grade.value = '6';
+  } else if (rounded >= input.grade5 && rounded < input.grade4) {
+    grade.value = '5';
+  } else if (rounded >= input.grade4 && rounded < input.grade3) {
+    grade.value = '4';
+  } else if (rounded >= input.grade3 && rounded < input.grade2) {
+    grade.value = '3';
+  } else if (rounded >= input.grade2 && rounded < input.grade1) {
+    grade.value = '2';
+  } else if (rounded >= input.grade1) {
+    grade.value = '1';
+  }
+  // calculate point scale
+  const scaleVals = [input.grade1, input.grade2, input.grade3, input.grade4, input.grade5, 0];
+  for (let g = 1; g <= 6; g++) {
+    if (g == 1) {
+      scale[g].push(input.possible);
+    } else {
+      scale[g].push(Math.round(input.possible * scaleVals[g - 2] / 100) - 1);
+    }
+    if (g == 6) {
+      scale[g].push(0);
+    } else {
+      scale[g].push(Math.round(input.possible * scaleVals[g - 1] / 100));
+    }
+  }
+}
+</script>
+
 <template>
   <h1 class="text-center m-0">Noten-Rechner</h1>
   <main class="grid grid-cols-2 gap-8">
@@ -116,108 +199,12 @@
   <footer class="mt-auto text-center text-muted">
     <p>Alle Angaben und Ergebnisse ohne Gewähr</p>
     <p>
-      <span class="block">v{{ version }}</span>
-      Created by <a href="https://twitter.com/devmount" target="_blank">Andreas Müller</a>.
+      <span class="block">v{{ $version }}</span>
+      Created by <a href="https://github.com/devmount" target="_blank">Andreas</a>.
       Download on <a href="https://github.com/devmount/grade-calculator" target="_blank">GitHub</a>.
     </p>
   </footer>
 </template>
-
-<script>
-import { defineComponent, inject } from 'vue';
-
-export default defineComponent({
-  name: 'app',
-  setup() {
-    const version = inject('version');
-    return { version }
-  },
-  data() {
-    return {
-      input: {
-        possible: '',
-        reached: '',
-        grade1: '',
-        grade2: '',
-        grade3: '',
-        grade4: '',
-        grade5: '',
-      },
-      config: {
-        points: 'r',
-        preset: ''
-      },
-      result: false,
-      grade: 0,
-      percent: 0,
-      scale: {
-        1: [],
-        2: [],
-        3: [],
-        4: [],
-        5: [],
-        6: [],
-      }
-    }
-  },
-  watch: {
-    'config.preset': function (val) {
-      if (val != '') {
-        var preset = val.split(',');
-        this.input.grade1 = preset[0];
-        this.input.grade2 = preset[1];
-        this.input.grade3 = preset[2];
-        this.input.grade4 = preset[3];
-        this.input.grade5 = preset[4];
-      } else {
-        this.input.grade1 = '';
-        this.input.grade2 = '';
-        this.input.grade3 = '';
-        this.input.grade4 = '';
-        this.input.grade5 = '';
-      }
-    }
-  },
-  methods: {
-    calculateGrade() {
-      this.result = true;
-      // calculate percent
-      this.percent = (this.config.points == 'r')
-        ? (this.input.reached / this.input.possible * 100).toFixed(2)
-        : ((1 - (this.input.reached / this.input.possible)) * 100).toFixed(2);
-      // calculate grade
-      const rounded = Math.round(this.percent);
-      if (rounded < this.input.grade5) {
-        this.grade = '6';
-      } else if (rounded >= this.input.grade5 && rounded < this.input.grade4) {
-        this.grade = '5';
-      } else if (rounded >= this.input.grade4 && rounded < this.input.grade3) {
-        this.grade = '4';
-      } else if (rounded >= this.input.grade3 && rounded < this.input.grade2) {
-        this.grade = '3';
-      } else if (rounded >= this.input.grade2 && rounded < this.input.grade1) {
-        this.grade = '2';
-      } else if (rounded >= this.input.grade1) {
-        this.grade = '1';
-      }
-      // calculate point scale
-      const scale = [this.input.grade1, this.input.grade2, this.input.grade3, this.input.grade4, this.input.grade5, 0];
-      for (let g = 1; g <= 6; g++) {
-        if (g == 1) {
-          this.scale[g].push(this.input.possible);
-        } else {
-          this.scale[g].push(Math.round(this.input.possible * scale[g - 2] / 100) - 1);
-        }
-        if (g == 6) {
-          this.scale[g].push(0);
-        } else {
-          this.scale[g].push(Math.round(this.input.possible * scale[g - 1] / 100));
-        }
-      }
-    }
-  }
-});
-</script>
 
 <style>
 @import '@devmount/sloth.css/sloth.min.css';
