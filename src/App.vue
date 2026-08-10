@@ -1,5 +1,9 @@
 <script setup>
 import { ref, reactive, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { STORAGE_KEY, SUPPORTED_LOCALES, LOCALE_NAMES } from '@/i18n';
+
+const { t, locale } = useI18n({ useScope: 'global' });
 
 const input = reactive({
   possible: '',
@@ -79,74 +83,80 @@ const calculateGrade = () => {
     }
   }
 }
+
+watch(locale, (val) => {
+  localStorage.setItem(STORAGE_KEY, val);
+  document.documentElement.lang = val;
+  document.title = t('title');
+}, { immediate: true });
 </script>
 
 <template>
-  <h1 class="text-center m-0">Noten-Rechner</h1>
+  <h1 class="text-center m-0">{{ t('title') }}</h1>
   <main class="grid grid-cols-2 gap-8">
     <section>
-      <h3 class="text-center">Einstellung</h3>
+      <h3 class="text-center">{{ t('settings.heading') }}</h3>
       <form class="card" @submit.prevent="calculateGrade">
-        <h5>Punkte</h5>
+        <h5>{{ t('settings.points') }}</h5>
         <div class="flex-col gap-2">
           <div class="input-group">
-            <span class="affix w-16 shrink-0 text-end">Möglich</span>
-            <input class="w-full" v-model="input.possible" type="number" step="0.5" placeholder="z.B. 20" required>
+            <span class="affix w-24 shrink-0 text-end">{{ t('settings.possible') }}</span>
+            <input class="w-full" v-model="input.possible" type="number" step="0.5" :placeholder="t('settings.placeholderPossible')" required>
           </div>
           <div class="input-group">
-            <span class="affix w-16 shrink-0 text-end">Ergebnis</span>
-            <input class="w-32" v-model="input.reached" type="number" step="0.5" placeholder="z.B. 18" required>
+            <span class="affix w-24 shrink-0 text-end">{{ t('settings.achieved') }}</span>
+            <input class="w-32" v-model="input.reached" type="number" step="0.5" :placeholder="t('settings.placeholderAchieved')" required>
             <select class="w-full" v-model="config.points">
-              <option value="r">Erreichte Punkte</option>
-              <option value="e">Fehler</option>
+              <option value="r">{{ t('settings.pointsReached') }}</option>
+              <option value="e">{{ t('settings.pointsError') }}</option>
             </select>
           </div>
         </div>
-        <h5>Maßstab</h5>
+        <h5>{{ t('settings.scale') }}</h5>
         <div class="flex-col gap-2">
           <div class="input-group">
-            <span class="affix w-20 shrink-0 text-end">Preset</span>
+            <span class="affix w-24 shrink-0 text-end">{{ t('settings.preset') }}</span>
             <select class="w-full" v-model="config.preset">
-              <option value="">Keine</option>
-              <option value="96,80,60,45,16">96, 80, 60, 45, 16 — Allgemein</option>
-              <option value="99,95,90,85,80">99, 95, 90, 85, 80 — Diktat</option>
-              <option value="95,90,85,80,75">95, 90, 85, 80, 75 — 5% Schritte</option>
-              <option value="90,80,70,60,50">90, 80, 70, 60, 50 — 10% Schritte</option>
+              <option value="">{{ t('settings.presetNone') }}</option>
+              <option value="96,80,60,45,16">{{ t('settings.preset1') }}</option>
+              <option value="99,95,90,85,80">{{ t('settings.preset2') }}</option>
+              <option value="95,90,85,80,75">{{ t('settings.preset3') }}</option>
+              <option value="90,80,70,60,50">{{ t('settings.preset4') }}</option>
             </select>
           </div>
           <div class="input-group mb-1">
-            <span class="affix w-20 shrink-0 text-end">Note 1 ab</span>
-            <input class="w-full" v-model="input.grade1" type="number" placeholder="z.B. 10" required>
+            <span class="affix w-24 shrink-0 text-end">{{ t('settings.gradeFrom', { n: 1 }) }}</span>
+            <input class="w-full" v-model="input.grade1" type="number" :placeholder="t('settings.placeholderGrade')" required>
             <span class="affix">%</span>
           </div>
           <div class="input-group mb-1">
-            <span class="affix w-20 shrink-0 text-end">Note 2 ab</span>
-            <input class="w-full" v-model="input.grade2" type="number" placeholder="z.B. 10" required>
+            <span class="affix w-24 shrink-0 text-end">{{ t('settings.gradeFrom', { n: 2 }) }}</span>
+            <input class="w-full" v-model="input.grade2" type="number" :placeholder="t('settings.placeholderGrade')" required>
             <span class="affix">%</span>
           </div>
           <div class="input-group mb-1">
-            <span class="affix w-20 shrink-0 text-end">Note 3 ab</span>
-            <input class="w-full" v-model="input.grade3" type="number" placeholder="z.B. 10" required>
+            <span class="affix w-24 shrink-0 text-end">{{ t('settings.gradeFrom', { n: 3 }) }}</span>
+            <input class="w-full" v-model="input.grade3" type="number" :placeholder="t('settings.placeholderGrade')" required>
             <span class="affix">%</span>
           </div>
           <div class="input-group mb-1">
-            <span class="affix w-20 shrink-0 text-end">Note 4 ab</span>
-            <input class="w-full" v-model="input.grade4" type="number" placeholder="z.B. 10" required>
+            <span class="affix w-24 shrink-0 text-end">{{ t('settings.gradeFrom', { n: 4 }) }}</span>
+            <input class="w-full" v-model="input.grade4" type="number" :placeholder="t('settings.placeholderGrade')" required>
             <span class="affix">%</span>
           </div>
           <div class="input-group mb-1">
-            <span class="affix w-20 shrink-0 text-end">Note 5 ab</span>
-            <input class="w-full" v-model="input.grade5" type="number" placeholder="z.B. 10" required>
+            <span class="affix w-24 shrink-0 text-end">{{ t('settings.gradeFrom', { n: 5 }) }}</span>
+            <input class="w-full" v-model="input.grade5" type="number" :placeholder="t('settings.placeholderGrade')" required>
             <span class="affix">%</span>
           </div>
           <div class="input-group mb-1">
-            <span class="affix w-20 shrink-0 text-end">Note 6 ab</span>
+            <span class="affix w-24 shrink-0 text-end">{{ t('settings.gradeFrom', { n: 6 }) }}</span>
             <input class="w-full" type="number" value="0" disabled>
             <span class="affix">%</span>
           </div>
           <div class="flex justify-end">
             <button type="submit">
-              Start
+              {{ t('settings.start') }}
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
                 <path d="M9 6l6 6l-6 6" />
               </svg>
@@ -156,7 +166,7 @@ const calculateGrade = () => {
       </form>
     </section>
     <section class="flex-col">
-      <h3 class="text-center">Ergebnis</h3>
+      <h3 class="text-center">{{ t('output.heading') }}</h3>
       <div v-if="!result" class="state empty rounded text-center grow">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
           stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16">
@@ -168,24 +178,33 @@ const calculateGrade = () => {
           <path d="M17 12h.01" />
           <path d="M13 12h.01" />
         </svg>
-        <h4>Noch kein Ergebnis verfügbar</h4>
-        <p>Fülle das Formular aus und klicke auf <span class="text-italic">Start</span>, um Aufgaben zu generieren.</p>
+        <h4>{{ t('output.emptyTitle') }}</h4>
+        <i18n-t keypath="output.emptyText" tag="p" scope="global">
+          <template #start><span class="text-italic">{{ t('settings.start') }}</span></template>
+        </i18n-t>
       </div>
 
       <div class="card grow gap-4" v-else>
         <div class="flex gap-4">
           <div>
-            <h5>Note</h5>
+            <h5>{{ t('output.grade') }}</h5>
             <span class="tag lg font-bold accent"><span class="text-2xl">{{ grade }}</span></span>
           </div>
           <div>
-            <h5>Erbrachte Leistung</h5>
-            <meter class="meter" :value="percent" :optimum="input.grade1" min="0" max="100" :low="input.grade5"
-              :high="input.grade2">{{ percent }}%</meter>
+            <h5>{{ t('output.performance') }}</h5>
+            <meter
+              class="meter"
+              :value="percent"
+              :optimum="input.grade1"
+              min="0"
+              max="100"
+              :low="input.grade5"
+              :high="input.grade2"
+            >{{ percent }}%</meter>
           </div>
         </div>
         <div>
-          <h5>Punkteverteilung</h5>
+          <h5>{{ t('output.distribution') }}</h5>
           <ol class="sequence">
             <li v-for="(g, i) in scale" :key="i" class="step" :class="{ accent: i >= grade, filled: i == grade }">
               <span class="tag">{{ i }}</span> &nbsp; {{ g[0] }} - {{ g[1] }}
@@ -193,15 +212,20 @@ const calculateGrade = () => {
           </ol>
         </div>
       </div>
+      <p class="text-xs text-end text-muted">{{ t('footer.disclaimer') }}</p>
     </section>
   </main>
 
   <footer class="mt-auto text-center text-muted">
-    <p>Alle Angaben und Ergebnisse ohne Gewähr</p>
+    <p class="flex-center gap-8">
+      <span class="font-mono">v{{ $version }}</span>
+      <select class="sm" v-model="locale">
+        <option v-for="l in SUPPORTED_LOCALES" :key="l" :value="l">{{ LOCALE_NAMES[l] }}</option>
+      </select>
+    </p>
     <p>
-      <span class="block">v{{ $version }}</span>
-      Created by <a href="https://github.com/devmount" target="_blank">Andreas</a>.
-      Download on <a href="https://github.com/devmount/grade-calculator" target="_blank">GitHub</a>.
+      {{ t('footer.createdBy') }} <a href="https://github.com/devmount" target="_blank">Andreas</a>.
+      {{ t('footer.downloadOn') }} <a href="https://github.com/devmount/grade-calculator" target="_blank">GitHub</a>.
     </p>
   </footer>
 </template>
@@ -221,11 +245,15 @@ const calculateGrade = () => {
   margin-top: auto;
 }
 
-.w-20 {
-  width: 5rem;
+.w-24 {
+  width: 6rem;
 }
 
 .list-none {
   list-style-type: none;
+}
+
+.affix {
+  text-wrap-mode: nowrap;
 }
 </style>

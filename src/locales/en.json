@@ -1,0 +1,36 @@
+{
+  "title": "Grade Calculator",
+  "settings": {
+    "heading": "Settings",
+    "points": "Points",
+    "possible": "Possible",
+    "achieved": "Achieved",
+    "pointsReached": "Points reached",
+    "pointsError": "Errors",
+    "scale": "Scale",
+    "preset": "Preset",
+    "presetNone": "None",
+    "preset1": "96, 80, 60, 45, 16 — General",
+    "preset2": "99, 95, 90, 85, 80 — Dictation",
+    "preset3": "95, 90, 85, 80, 75 — 5% steps",
+    "preset4": "90, 80, 70, 60, 50 — 10% steps",
+    "gradeFrom": "Grade {n} from",
+    "placeholderPossible": "e.g. 20",
+    "placeholderAchieved": "e.g. 18",
+    "placeholderGrade": "e.g. 10",
+    "start": "Start"
+  },
+  "output": {
+    "heading": "Result",
+    "emptyTitle": "No result available yet",
+    "emptyText": "Fill out the form and click {start} to calculate the grade.",
+    "grade": "Grade",
+    "performance": "Performance achieved",
+    "distribution": "Point distribution"
+  },
+  "footer": {
+    "disclaimer": "All data and results without guarantee",
+    "createdBy": "Created by",
+    "downloadOn": "Download on"
+  }
+}

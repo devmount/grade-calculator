@@ -11,7 +11,8 @@
   "packageManager": "pnpm@11.21.0",
   "dependencies": {
     "@devmount/sloth.css": "^0.4.2",
-    "vue": "^3.5.41"
+    "vue": "^3.5.41",
+    "vue-i18n": "^11.4.8"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.8",
