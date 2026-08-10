@@ -1,0 +1,36 @@
+{
+  "title": "Noten-Rechner",
+  "settings": {
+    "heading": "Einstellung",
+    "points": "Punkte",
+    "possible": "Möglich",
+    "achieved": "Ergebnis",
+    "pointsReached": "Erreichte Punkte",
+    "pointsError": "Fehler",
+    "scale": "Maßstab",
+    "preset": "Preset",
+    "presetNone": "Keine",
+    "preset1": "96, 80, 60, 45, 16 — Allgemein",
+    "preset2": "99, 95, 90, 85, 80 — Diktat",
+    "preset3": "95, 90, 85, 80, 75 — 5% Schritte",
+    "preset4": "90, 80, 70, 60, 50 — 10% Schritte",
+    "gradeFrom": "Note {n} ab",
+    "placeholderPossible": "z.B. 20",
+    "placeholderAchieved": "z.B. 18",
+    "placeholderGrade": "z.B. 10",
+    "start": "Start"
+  },
+  "output": {
+    "heading": "Ergebnis",
+    "emptyTitle": "Noch kein Ergebnis verfügbar",
+    "emptyText": "Fülle das Formular aus und klicke auf {start}, um die Note zu berechnen.",
+    "grade": "Note",
+    "performance": "Erbrachte Leistung",
+    "distribution": "Punkteverteilung"
+  },
+  "footer": {
+    "disclaimer": "Alle Angaben und Ergebnisse ohne Gewähr",
+    "createdBy": "Erstellt von",
+    "downloadOn": "Herunterladen auf"
+  }
+}
