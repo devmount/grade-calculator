@@ -1,6 +1,7 @@
 <script setup>
 import { ref, reactive, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { STORAGE_KEY } from '@/i18n';
 
 const { t, locale } = useI18n({ useScope: 'global' });
 
@@ -84,7 +85,7 @@ const calculateGrade = () => {
 }
 
 watch(locale, (val) => {
-  localStorage.setItem('locale', val);
+  localStorage.setItem(STORAGE_KEY, val);
   document.documentElement.lang = val;
   document.title = t('title');
 }, { immediate: true });

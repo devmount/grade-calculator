@@ -2,7 +2,7 @@ import { createI18n } from 'vue-i18n';
 import de from '@/locales/de.json';
 import en from '@/locales/en.json';
 
-const STORAGE_KEY = 'locale';
+export const STORAGE_KEY = 'locale';
 const SUPPORTED_LOCALES = ['de', 'en'];
 const DEFAULT_LOCALE = 'de';
 
