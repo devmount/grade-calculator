@@ -1,7 +1,7 @@
 <script setup>
 import { ref, reactive, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { STORAGE_KEY } from '@/i18n';
+import { STORAGE_KEY, SUPPORTED_LOCALES, LOCALE_NAMES } from '@/i18n';
 
 const { t, locale } = useI18n({ useScope: 'global' });
 
@@ -220,8 +220,7 @@ watch(locale, (val) => {
     <p class="flex-center gap-8">
       <span class="font-mono">v{{ $version }}</span>
       <select class="sm" v-model="locale">
-        <option value="de">Deutsch</option>
-        <option value="en">English</option>
+        <option v-for="l in SUPPORTED_LOCALES" :key="l" :value="l">{{ LOCALE_NAMES[l] }}</option>
       </select>
     </p>
     <p>

@@ -3,7 +3,8 @@ import de from '@/locales/de.json';
 import en from '@/locales/en.json';
 
 export const STORAGE_KEY = 'locale';
-const SUPPORTED_LOCALES = ['de', 'en'];
+export const SUPPORTED_LOCALES = ['de', 'en'];
+export const LOCALE_NAMES = { de: 'Deutsch', en: 'English' };
 const DEFAULT_LOCALE = 'de';
 
 function detectLocale () {
