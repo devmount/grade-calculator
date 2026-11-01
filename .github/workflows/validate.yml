@@ -11,9 +11,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  oxlint:
-    name: Lint JS
+  validate:
+    name: Lint & Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - run: npx --yes oxlint@latest --deny-warnings # change to the latest release
+      - uses: actions/checkout@v7
+      - uses: pnpm/setup@v3
+        with:
+          runtime: node@26
+      - name: Lint JS
+        run: pnpm lint --deny-warnings
+      - name: Build app
+        run: pnpm build
